@@ -71,32 +71,61 @@ function addToCart(){
 }
 
 
-function showCart(){
-    document.querySelector(".carticon")
-    .addEventListener("click", function(){
-        document.querySelector(".cartexpnd").style.display = "block";
+// function showCart(){
+//     document.querySelector(".carticon")
+//     .addEventListener("click", function(){
+//         document.querySelector(".cartexpnd").style.display = "block";
     
 
-    var clutter = "";
-    cart.forEach(function(prod, index) {
+//     var clutter = "";
+//     cart.forEach(function(prod, index) {
 
-        clutter += `<div class="flex gap-2 bg-white p-2 rounded-lg">
-        <div class="w-10 h-10 flex-shrink-0 rounded-lg bg-red-500">
-            <img src="${prod.image}" />
-        </div>
-        <div>
-        <h3 class="font-semibold">${prod.name}</h3>
-        <h5 class="text-sm font-semibold opacity-80">${prod.price}</h5>
-        </div>
-        </div>`;
+//         clutter += `<div class="flex gap-2 bg-white p-2 rounded-lg">
+//         <div class="w-10 h-10 flex-shrink-0 rounded-lg bg-red-500">
+//             <img src="${prod.image}" />
+//         </div>
+//         <div>
+//         <h3 class="font-semibold">${prod.name}</h3>
+//         <h5 class="text-sm font-semibold opacity-80">${prod.price}</h5>
+//         </div>
+//         </div>`;
     
-        });
+//         });
         
-        document.querySelector(".cartexpnd")
-        .innerHTML = clutter;  
+//         document.querySelector(".cartexpnd")
+//         .innerHTML = clutter;  
 
+//     });
+// }
+function showCart() {
+    document.querySelector(".carticon").addEventListener("click", function() {
+        const cartContainer = document.querySelector(".cartexpnd");
+        
+        // Toggle cart visibility
+        if (cartContainer.style.display === "block") {
+            cartContainer.style.display = "none"; // Hide cart if already visible
+        } else {
+            cartContainer.style.display = "block"; // Show cart if hidden
+
+            // Render cart items only when the cart is shown
+            let clutter = "";
+            cart.forEach(function(prod) {
+                clutter += `<div class="flex gap-2 bg-white p-2 rounded-lg">
+                    <div class="w-10 h-10 flex-shrink-0 rounded-lg bg-red-500">
+                        <img src="${prod.image}" />
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">${prod.name}</h3>
+                        <h5 class="text-sm font-semibold opacity-80">${prod.price}</h5>
+                    </div>
+                </div>`;
+            });
+            
+            cartContainer.innerHTML = clutter;
+        }
     });
 }
+
 
 
 showCart();
